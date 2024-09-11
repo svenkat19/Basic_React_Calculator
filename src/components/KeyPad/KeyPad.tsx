@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import './KeyPad.css';
 import CalciContex from '../../context/CalciContex';
 
+let status = "";
 const KeyPad: React.FC = () => {
     const context = useContext(CalciContex);
 
@@ -10,7 +11,6 @@ const KeyPad: React.FC = () => {
     }
 
     const { stored, setStored, current, setCurrent } = context;
-    let status = "";
     const addNum = (value: string): void => {
         if (current.includes(".") && value === '.')
             return;
@@ -24,24 +24,88 @@ const KeyPad: React.FC = () => {
         if (stored === null) {
             setStored(current);
             status = value;
+            setCurrent(status)
             return
         }
-        status=value;
-        equals()
-        setCurrent("")
+
+        status = value;
+        if (status === '+'.toString()) {
+let temp=stored;
+            setStored(current)
+            setStored((parseFloat(temp) + parseFloat(current.slice(1))).toString());
+            setCurrent(status);
+            return;
+        }
+        else if (status === '-'.toString()) {
+let temp=stored;
+            setStored(current)
+            setStored((parseFloat(temp) - parseFloat(current.slice(1))).toString());
+            setCurrent(status);
+            return;
+        }
+        else if (status === '*'.toString()) {
+let temp=stored;
+            setStored(current)
+            setStored((parseFloat(temp) * parseFloat(current.slice(1))).toString());
+            setCurrent(status);
+            return;
+        }
+        else if (status === '/'.toString()) {
+            if (parseFloat(current.slice(1)) === 0.0) {
+                alert('Cannot Divide By Zero');
+                setCurrent("")
+                setStored(null)
+                return;
+            }
+let temp=stored;
+            setStored(current)
+            setStored((parseFloat(temp) / parseFloat(current.slice(1))).toString());
+            setCurrent(status);
+            return;
+        }
+        // equals()
+        // setCurrent("")
     }
     const clearCalculation = (): void => {
         setCurrent("");
         setStored(null);
     };
     const equals = (): void => {
-        if (current===null && stored === null)
-            return;
-        if(stored===null)
-        {
+        if (current === null && stored === null) { return; }
+        if (stored === null) {
             setStored(current);
             status = "";
             return
+        }
+        if (status === '+'.toString()) {
+            setCurrent((parseFloat(stored) + parseFloat(current.slice(1))).toString());
+            setStored(null);
+            status = "";
+            return;
+        }
+        else if (status === '-'.toString()) {
+            setCurrent((parseFloat(stored) - parseFloat(current.slice(1))).toString());
+            setStored(null);
+            status = "";
+            return;
+        }
+        else if (status === '*'.toString()) {
+            setCurrent((parseFloat(stored) * parseFloat(current.slice(1))).toString());
+            setStored(null);
+            status = "";
+            return;
+        }
+        else if (status === '/'.toString()) {
+            if (parseFloat(current.slice(1)) === 0.0) {
+                alert('Cannot Divide By Zero');
+                setCurrent("")
+                setStored(null)
+                return;
+            }
+            setCurrent((parseFloat(stored) / parseFloat(current.slice(1))).toString());
+            setStored(null);
+            status = "";
+            return;
         }
 
     }
@@ -69,7 +133,7 @@ const KeyPad: React.FC = () => {
                 <div className="row">
                     <button type="button" className="btn btn-light col-3" onClick={() => addNum("0")}>0</button>
                     <button type="button" className="btn btn-light col-3" onClick={() => addNum(".")}>.</button>
-                    <button type="button" className="btn btn-info equal col-3" onClick={() => equals()}>=</button>
+                    <button type="button" className="btn btn-info equal col-3" onClick={() => { equals();}}>=</button>
                     <button type="button" className="btn btn-warning operator col-3" onClick={() => arithmetic("+")}>+</button>
                 </div>
                 <div className="row">

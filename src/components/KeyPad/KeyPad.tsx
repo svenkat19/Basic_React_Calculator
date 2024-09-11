@@ -10,7 +10,7 @@ const KeyPad: React.FC = () => {
         throw new Error("KeyPad must be used within a CalciContex.Provider");
     }
 
-    const { stored, setStored, current, setCurrent } = context;
+    const { stored, setStored, current, setCurrent,setAlerter } = context;
     const addNum = (value: string): void => {
         if (current.includes(".") && value === '.')
             return;
@@ -52,7 +52,7 @@ let temp=stored;
         }
         else if (status === '/'.toString()) {
             if (parseFloat(current.slice(1)) === 0.0) {
-                alert('Cannot Divide By Zero');
+                setAlerter(true);
                 setCurrent("")
                 setStored(null)
                 return;
@@ -97,7 +97,8 @@ let temp=stored;
         }
         else if (status === '/'.toString()) {
             if (parseFloat(current.slice(1)) === 0.0) {
-                alert('Cannot Divide By Zero');
+                
+                setAlerter(true)
                 setCurrent("")
                 setStored(null)
                 return;

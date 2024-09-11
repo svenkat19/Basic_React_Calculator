@@ -1,24 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import TextBox from './components/TextBox/TextBox';
+import KeyPad from './components/KeyPad/KeyPad';
+import CalciContex from './context/CalciContex';
 
 function App() {
+  const [stored, setStored] = useState<string | null>(null);
+  const [current, setCurrent] = useState<string>("");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <CalciContex.Provider value={{ stored, setStored, current, setCurrent }}>
+        <div className="container my-5">
+          <TextBox />
+          <KeyPad />
+        </div>
+      </CalciContex.Provider>
+
     </div>
   );
 }

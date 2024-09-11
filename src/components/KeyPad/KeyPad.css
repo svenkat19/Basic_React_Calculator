@@ -1,0 +1,44 @@
+.calculator-keys {
+    text-align: right;
+    font-size: 24px;
+    max-width: 500px; /* Match the TextBox width */
+    margin: 5px auto 50px auto; /* Margin-top set to 5px for the gap */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.calculator-keys button {
+    width: 25%;
+    font-size: 20px;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.calculator-keys button:hover {
+    transform: scale(1.05);
+    background-color: #e9ecef;
+}
+
+.calculator-keys button:active {
+    transform: scale(0.95); /* Make the button appear pressed down */
+    background-color: #d6d6d6; /* Optionally change the background color on click */
+}
+
+.calculator-keys .operator {
+    background-color: #f0ad4e;
+    color: white;
+}
+
+.calculator-keys .clear {
+    background-color: #d9534f;
+    color: white;
+}
+
+.calculator-keys .equal {
+    background-color: #5bc0de;
+    color: white;
+}

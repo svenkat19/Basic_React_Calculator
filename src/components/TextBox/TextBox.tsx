@@ -9,7 +9,7 @@ const TextBox = () => {
     throw new Error("TextBox must be used within a CalciContex.Provider");
   }
 
-  const { stored, current,setCurrent } = context;
+  const {current,setCurrent } = context;
 
   return (
     <div>

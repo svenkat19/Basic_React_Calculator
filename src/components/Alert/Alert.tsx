@@ -9,7 +9,7 @@ const Alert: React.FC<AlertProps> = ({ onClose }) => {
     useEffect(() => {
         const timer = setTimeout(() => {
             onClose();
-        }, 3000); // 5 seconds
+        }, 3000); // 3 seconds
 
         return () => clearTimeout(timer); // Cleanup timer on component unmount
     }, [onClose]);
